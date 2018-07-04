@@ -1,10 +1,10 @@
 var init;
 var ptr;
-var cvbridge;
+var facewasm;
 
 function initMemory(imageData) {
 
-	cvbridge = new Module.CVBridge(imageData.width,imageData.height);
+	facewasm = new Module.FaceWASM(imageData.width,imageData.height);
 	ptr      = Module._malloc(imageData.width * imageData.height * 4);
 
 }
@@ -18,7 +18,7 @@ function processFrame(imageData) {
 	}
 
   Module.HEAPU8.set(imageData.data,ptr);
-	let facialPoints = cvbridge.processFrame(ptr);
+	let facialPoints = facewasm.processFrame(ptr);
 	let YPR = [];
 	
 	for (let i=0; i<3; i++) {
@@ -44,8 +44,8 @@ self.onmessage = function (e) {
 			processFrame(e.data.img);
 			break;
 		case 'exit':
-			if (cvbridge !== undefined)
-				cvbridge.delete();
+			if (facewasm !== undefined)
+				facewasm.delete();
 		    if (ptr !== undefined)
 		    	Module._free(ptr);	
 		    break;

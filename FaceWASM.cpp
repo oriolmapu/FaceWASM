@@ -20,7 +20,7 @@ struct jsObj {
 	float S;
 };
 
-class CVBridge {
+class FaceWASM {
 
 	public:
 	
@@ -40,7 +40,7 @@ class CVBridge {
 		Mat wPtsVec;
 
 
-		CVBridge(int width, int height) {
+		FaceWASM(int width, int height) {
 
 			/********************/
 			/* INITIALITZATIONS */
@@ -189,7 +189,7 @@ class CVBridge {
 };
 
 
-EMSCRIPTEN_BINDINGS(cvbridge) {
+EMSCRIPTEN_BINDINGS(facewasm) {
 
 	
 	value_array<jsPt>("jsPt")
@@ -207,9 +207,9 @@ EMSCRIPTEN_BINDINGS(cvbridge) {
 			.element(&jsObj::S)
         ;
 
-	class_<CVBridge>("CVBridge")
+	class_<FaceWASM>("FaceWASM")
 		.constructor<int,int>()
-		.function("processFrame",&CVBridge::processFrame)
+		.function("processFrame",&FaceWASM::processFrame)
 	;
 
 }
