@@ -149,7 +149,7 @@ class FaceWASM {
 					t->ipatch2tmpltPro(grayframe, patch, world2patch, patch2world, wPts);
 					transform(wPts, esPts, world2patch);
 
-					obj.S = sqrt(pow(patch2world.at<float>(0, 0), 2) + pow(patch2world.at<float>(1, 1), 2));
+					obj.S = sqrt(pow(patch2world.at<float>(0, 0), 2) + pow(patch2world.at<float>(0, 1), 2));
 
 
 					for (int j = 0; j < (this->wPts).size(); j++) {
