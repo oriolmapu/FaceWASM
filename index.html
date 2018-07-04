@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>FaceASM</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+
+<body>
+	
+	<h1 style="text-align: center; background-color:yellowgreen ;color:white;"> FaceWASM </h1> 
+	<video  style="display: none" autoplay id="videoElement"></video>
+	<canvas style="display: none" id="dummy"> </canvas>
+	<canvas style="display: none" id="dummygl"></canvas>
+	<div id="viewers" style="text-align: center">
+	<canvas  style="max-width: 100%; height: auto;" id="viewer"></canvas>
+	</div>
+	
+	<script src="http://threejs.org/build/three.min.js"></script>
+	<script src="OBJLoader.js"></script>
+	<script src="MTLLoader.js"></script>
+	<script src="Controller.js"></script>
+
+</body>
+
+</html>
