@@ -1,5 +1,5 @@
 let ws   = {};
-let faceWorker = new Worker('FaceWorker.js'); 
+let faceworker = new Worker('FaceWorker.js'); 
 
 function setWebcam () {
 
@@ -7,6 +7,9 @@ function setWebcam () {
 	
 	navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
 		 ws.video.srcObject = stream;
+		 ws.video.onloadedmetadata = function(e) {
+			ws.video.play();
+		};
 	 })
 	 .catch(function(err) {
 		 console.log(err.name);
@@ -193,7 +196,7 @@ function updateCanvas3D(e) {
 			ws.gl.glasses.object.visible = false;
 		}
 		else { 
-			// Bukld the appropiate theoretical model
+			// Build the appropiate theoretical model
 			ws.gl.landmarks.points.visible = true;
 			rotateObject(ws.gl.glasses.object,YPR[1],-YPR[0],-YPR[2]+3*Math.PI/180)
 			ws.gl.glasses.object.scale.set(scale*128/640,scale*128/640,scale*128/640);
