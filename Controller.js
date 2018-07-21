@@ -1,5 +1,5 @@
 let ws   = {};
-let faceworker = new Worker('FaceWorker.js'); 
+let faceWorker = new Worker('FaceWorker.js'); 
 
 function setWebcam () {
 
