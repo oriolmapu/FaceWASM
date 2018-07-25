@@ -6,7 +6,6 @@ function initMemory(imageData) {
 
 	facewasm = new Module.FaceWASM(imageData.width,imageData.height);
 	ptr      = Module._malloc(imageData.width * imageData.height * 4);
-	Module.HEAPU8.set(imageData.data,ptr);
 
 }
 
@@ -18,6 +17,7 @@ function processFrame(imageData) {
 		initMemory(imageData);
 	}
 
+  Module.HEAPU8.set(imageData.data,ptr);
 	let facialPoints = facewasm.processFrame(ptr);
 	let YPR = [];
 	
