@@ -197,8 +197,8 @@ function updateCanvas3D(e) {
 		}
 		else { 
 			// Build the appropiate theoretical model
-			ws.gl.landmarks.points.visible = true;
-			rotateObject(ws.gl.glasses.object,YPR[1],-YPR[0],-YPR[2]+3*Math.PI/180)
+			ws.gl.landmarks.points.visible = false;
+			//rotateObject(ws.gl.glasses.object,YPR[1],-YPR[0],-YPR[2]+3*Math.PI/180)
 			ws.gl.glasses.object.position.set(landmarks[33*3]+(100*Math.sin(YPR[0])),landmarks[33*3+1]+(100*Math.sin(YPR[1]))+10,-20);
 			ws.gl.glasses.object.scale.set(scale*128/640,scale*128/640,scale*128/640);
 			//ws.gl.glasses.object.position.set(landmarks[33*3],landmarks[33*3+1],-50);
