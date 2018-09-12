@@ -197,10 +197,9 @@ function updateCanvas3D(e) {
 		}
 		else { 
 
-			ws.gl.landmarks.points.visible = true;
 			ws.gl.glasses.object.scale.set(scale*128/640,scale*128/640,scale*128/640);
 			var box = new THREE.Box3().setFromObject(ws.gl.glasses.object)
-			rotateObject(ws.gl.glasses.object,YPR[1],-YPR[0],-YPR[2]+Math.PI/180)
+			rotateObject(ws.gl.glasses.object,YPR[1],-YPR[0],-YPR[2]+Math.PI/180);
 			
 			dx = (box.max.x - box.min.x)/2;
 			
@@ -210,6 +209,9 @@ function updateCanvas3D(e) {
 			var l = 30;
 			
 			ws.gl.glasses.object.position.set(landmarks[l*3]+xcoor,landmarks[l*3+1]+ycoor,0);
+			
+			//Visibility flags (landmarks, glasses)
+			ws.gl.landmarks.points.visible = false;
 			ws.gl.glasses.object.visible = true;
 		}
 		
