@@ -66,7 +66,7 @@ function setWorkspace() {
 	ws.gl.camera = new THREE.OrthographicCamera( ws.width / - 2, ws.width / 2, ws.height / 2, ws.height / - 2, NEAR, FAR );
 	//ws.gl.camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 	// TODO: Avoid camera hard coding
-	ws.gl.camera.position.set(0,0,579);
+	ws.gl.camera.position.set(0,0,200);
 	ws.gl.camera.lookAt(0, 0, 0);
 	ws.gl.scene.add(ws.gl.camera);
 	// Inject texture
@@ -100,7 +100,7 @@ function setWorkspace() {
 	  ws.gl.glasses.objLoader.load('objects/RayBanz.obj', function(object) {
 		ws.gl.glasses.object = object;
 		ws.gl.glasses.object.position.set(0,0,0);
-		ws.gl.glasses.object.scale.set(200/640,200/640,200/640);
+		//ws.gl.glasses.object.scale.set(200/640,200/640,200/640);
 		ws.gl.glasses.object.visible = false;
 		ws.gl.scene.add(object);
 	  }, null, null);
@@ -179,7 +179,7 @@ function updateCanvas3D(e) {
 		
 		let landmarks = ws.gl.landmarks.points.geometry.attributes.position.array;
 		let index = 0;
-		let zaxis = 1; 
+		let zaxis = 0; 
 		
 		let YPR   = e.data.YPR;
 		let scale = e.data.scale;
@@ -196,12 +196,20 @@ function updateCanvas3D(e) {
 			ws.gl.glasses.object.visible = false;
 		}
 		else { 
-			// Build the appropiate theoretical model
-			ws.gl.landmarks.points.visible = false;
-			//rotateObject(ws.gl.glasses.object,YPR[1],-YPR[0],-YPR[2]+3*Math.PI/180)
-			ws.gl.glasses.object.position.set(landmarks[33*3]+(100*Math.sin(YPR[0])),landmarks[33*3+1]+(100*Math.sin(YPR[1]))+10,-20);
+
+			ws.gl.landmarks.points.visible = true;
 			ws.gl.glasses.object.scale.set(scale*128/640,scale*128/640,scale*128/640);
-			//ws.gl.glasses.object.position.set(landmarks[33*3],landmarks[33*3+1],-50);
+			var box = new THREE.Box3().setFromObject(ws.gl.glasses.object)
+			rotateObject(ws.gl.glasses.object,YPR[1],-YPR[0],-YPR[2]+Math.PI/180)
+			
+			dx = (box.max.x - box.min.x)/2;
+			
+			var xcoor = Math.sin(YPR[0])*dx;
+			var ycoor = Math.sin(YPR[1])*dx;
+			
+			var l = 30;
+			
+			ws.gl.glasses.object.position.set(landmarks[l*3]+xcoor,landmarks[l*3+1]+ycoor,0);
 			ws.gl.glasses.object.visible = true;
 		}
 		
